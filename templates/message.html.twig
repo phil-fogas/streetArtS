@@ -1,0 +1,50 @@
+{% extends 'compte.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<!-- pages gestion message envoyer par email -->
+<h1>Messages envois par mail</h1>
+<table>
+	<thead>
+		<tr>
+			<th>
+				email
+			</th>
+			<th>
+				sujet
+			</th>
+			<th>
+				message
+			</th>
+			<th>
+				date
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+	
+		{% for messages in messages %}
+		<tr>
+			<td>
+				<a href="mailto:{{ messages.email }}" title="mail">{{ messages.email }}</a>
+			</td>
+			<td>
+				{{ messages.sujet }}
+			</td>
+			<td>
+				{{ messages.message }}
+			</td>
+			<td>
+				{{ messages.date|date("d/m/Y h:i ") }}
+			</td>
+			<td>
+				<a class="red" href="{{ path('delmessage', {id:messages.id}) }}" title="suprimer"><i class="icofont-ui-close"></i> Supprimer </a>
+			</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

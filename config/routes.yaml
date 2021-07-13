@@ -1,3 +1,148 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+home:
+    path: /
+    controller: App\Controller\DefaultController::index
+
+propos:
+    path: /propos
+    controller: App\Controller\DefaultController::propos
+
+oublier:
+    path: /oublier
+    controller: App\Controller\DefaultController::oublier
+
+setoublier:
+    path: /setoublier
+    controller: App\Controller\DefaultController::setoublier
+
+contact:
+    path: /contact
+    controller: App\Controller\DefaultController::contact
+
+addcontact:
+    path: /addcontact
+    controller: App\Controller\DefaultController::addcontact    
+
+galerie:
+    path: /galerie
+    controller: App\Controller\DefaultController::galerie
+
+jeu:
+    path: /jeu
+    controller: App\Controller\DefaultController::jeu
+
+suggestion:
+    path: /suggestion
+    controller: App\Controller\DefaultController::suggestion
+
+connection:
+    path: /connection
+    controller: App\Controller\DefaultController::connection
+
+setconnection:
+    path: /setconnection
+    controller: App\Controller\DefaultController::setconnection    
+
+plan:
+    path: /plan
+    controller: App\Controller\DefaultController::plan
+
+delcomment:
+    path: /delcomment/{id}
+    controller: App\Controller\DefaultController::delcomment
+
+delmessage:
+    path: /delmessage/{id}
+    controller: App\Controller\DefaultController::delmessage 
+
+delmenbre:
+    path: /delmenbre/{id}
+    controller: App\Controller\DefaultController::delmenbre
+
+delcategorie:
+    path: /delcategorie
+    controller: App\Controller\DefaultController::delcategorie 
+
+setcategorie:
+    path: /setcategorie
+    controller: App\Controller\DefaultController::setcategorie    
+
+delpost:
+    path: /delpost/{id}
+    controller: App\Controller\DefaultController::delpost 
+    
+setpost:
+    path: /setpost
+    controller: App\Controller\DefaultController::setpost
+
+uppost:
+    path: /uppost
+    controller: App\Controller\DefaultController::uppost  
+
+modif:
+    path: /modif/{id}
+    controller: App\Controller\DefaultController::modif
+    methods: GET|HEAD    
+
+setcomment:
+    path: /setcomment
+    controller: App\Controller\DefaultController::setcomment
+    
+archive:
+    path: /archive/{id}
+    controller: App\Controller\DefaultController::archive
+    methods: GET|HEAD 
+
+detail:
+    path: /detail/{id}
+    controller: App\Controller\DefaultController::detail
+    methods: GET|HEAD
+
+vote:
+    path: /vote/{v}/{vot}
+    controller: App\Controller\DefaultController::vote
+    methods: GET|HEAD
+
+updroit:
+    path: /updroit/{id}/{d}
+    controller: App\Controller\DefaultController::updroit
+    methods: GET|HEAD
+
+compte:
+    path: /compte
+    controller: App\Controller\DefaultController::compte
+
+addcompte:
+    path: /addcompte
+    controller: App\Controller\DefaultController::addcompte  
+
+adcompte:
+    path: /adcompte
+    controller: App\Controller\DefaultController::adcompte 
+
+categories:
+    path: /categories
+    controller: App\Controller\DefaultController::categories
+
+menbres:
+    path: /menbres
+    controller: App\Controller\DefaultController::menbres   
+
+messages:
+    path: /messages
+    controller: App\Controller\DefaultController::messages 
+    
+comments:
+    path: /comments
+    controller: App\Controller\DefaultController::comments  
+
+streets:
+    path: /streets
+    controller: App\Controller\DefaultController::streets  
+
+deconnec:
+    path: /deconnec
+    controller: App\Controller\DefaultController::deconnec 
+
+noPage:
+    path: /noPage
+    controller: App\Controller\DefaultController::noPage 

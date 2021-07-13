@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<!-- page <?= $_GET['erreur'] ?> -->
+<h1>Mais quel est le probleme ?</h1>
+<section class="article">
+<h2> Page <?= $_GET['erreur'] ?> </h2>
+
+<p><?= $ere ?></p>
+    
+<a href="index.php"  title="retour acceuil">Revenir sur le site</a>
+
+</section>
+
+{% endblock %}

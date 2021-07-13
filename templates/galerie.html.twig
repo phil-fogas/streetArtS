@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<!-- page galerie pour une recheche par categorie et non de rue partielle-->
+<article class="article">
+<h1>Galerie des street Art</h1>
+	<form action="#" method="post" class="form">
+		<div class="field">
+			<input type="hidden" name="p" id="p" value="galerie">
+			<label for="rue">Recherche par rue: </label>
+			<input type="text" name="rue" id="rue">
+		</div>
+		<div class="field">
+			<label for="rue">Recherche par categorie: </label>
+			<select name="categorie" id="categorie">
+				<option value="">selectionner votre categorie</option>
+		 
+        	 {% for categorie in categorie %}
+   			<option value="{{ categorie.id }}">{{ categorie.name }}</option>
+
+        	{% endfor %}
+			</select>
+		</div>
+		<div class="field">
+			<button type="submit" class="botton">recherche</button>
+		</div>
+	</form>
+</article>
+
+<!-- afichage de la recherhce  en ajax ou sumit -->
+<div id="galerie" class="centre">
+{{ include('search.html.twig') }}
+</div>
+
+{% endblock %}

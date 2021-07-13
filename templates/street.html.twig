@@ -1,0 +1,156 @@
+{% extends 'compte.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<!-- pages des liste des fiches -->
+<h1>Vos street Art réference</h1>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">
+				street
+			</th>
+			<th scope="col">
+				date création et pseudo
+			</th>
+			<th scope="col">
+				catégorie
+			</th>
+			<th scope="col">
+				status
+			</th>
+			<th scope="col">
+				date de création
+			</th>
+			<th scope="col">
+				adresse
+			</th>
+			<th scope="col">
+				photo
+			</th>
+			<th scope="col">
+				description
+			</th>
+			<th scope="col">
+				suppression
+			</th>
+			<th scope="col">
+				modifier
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		
+				<tr>
+			<th colspan="10" scope="row">
+				<h2>Streets par vous</h2>
+			</th>
+		</tr>
+		{% for streets in streets %}
+		
+		<tr>
+			<td scope="row">
+			{% if streets.name %}
+			<a  href="{{ path('detail', {id:streets.id} ) }}" target="_self"> {{ streets.name }}</a>
+			{% else %}
+			<a  href="{{ path('detail', {id:streets.id} ) }}" target="_self"> street {{ streets.id }}</a>
+			{% endif %}
+		
+			</td>
+			<td>
+				{{ streets.dateFiche|date("d/m/Y") }}
+				
+			</td>
+			<td>
+				{{ streets.categorie }}
+			</td>
+			<td>
+				{{ streets.statut }}
+			</td>
+			<td>
+				{{ streets.dateCreation|date("d/m/Y") }} 
+			</td>
+			<td>
+				{{ streets.adresse }}
+			</td>
+			<td>
+				<img 
+				src="./img/{{ streets.photo }}"
+				 data-src="./img/{{ streets.photo }}"
+				{% if streets.name  %}
+					alt="{{ streets.name }}"
+				{%else%} 
+					alt="{{ streets.photo }}"
+				{%endif%}
+				>
+			</td>
+			<td>
+				{{ streets.description }}
+			</td>
+			<td>
+				<a class="red" href="{{ path('archive', {id:streets.id}) }}"><i class="icofont-ui-close"></i> Supprimer </a>
+			</td>
+			<td>
+				<a class="green" href="{{ path('modif', {id:streets.id}) }}"><i class="icofont-ui-check"></i> Modifier </a>
+			</td>
+		</tr>
+		{% endfor %}
+{% if streetsAll %}
+			<th colspan="10" scope="row">
+				<h2>Streets par les autres</h2>
+			</th>
+			{% for streetsAll in streetsAll %}
+		
+		<tr>
+			<td scope="row">
+			{% if streetsAll.name %}
+			<a  href="{{ path('detail', {id:streetsAll.id} ) }}" target="_self"> {{ streetsAll.name }}</a>
+			{% else %}
+			<a  href="{{ path('detail', {id:streetsAll.id} ) }}" target="_self"> street {{ streetsAll.id }}</a>
+			{% endif %}
+			</td>
+			<td>
+				{{ streetsAll.dateFiche|date("d/m/Y") }}
+				 Par:
+				{{ streetsAll.pseudo }}
+			</td>
+			<td>
+				{{ streetsAll.categorie }}
+			</td>
+			<td>
+				{{ streetsAll.statut }}
+			</td>
+			<td>
+				{{ streetsAll.dateCreation|date("d/m/Y") }} 
+			</td>
+			<td>
+				{{ streetsAll.adresse }}
+			</td>
+			<td>
+				<img 
+				src="./img/{{ streetsAll.photo }}"
+				 data-src="./img/{{ streetsAll.photo }}"
+				{% if streetsAll.name  %}
+					alt="{{ streetsAll.name }}"
+				{%else%} 
+					alt="{{ streetsAll.photo }}"
+				{%endif%}
+				>
+			</td>
+			<td>
+				{{ streetsAll.description }}
+			</td>
+			<td>
+				<a class="red" href="{{ path('archive', {id:streetsAll.id}) }}"><i class="icofont-ui-close"></i> Supprimer </a>
+			</td>
+			<td>
+				<a class="green" href="{{ path('modif', {id:streetsAll.id}) }}"><i class="icofont-ui-check"></i> Modifier </a>
+			</td>
+		</tr>
+		{% endfor %}
+{% endif %}
+	</tbody>
+</table>
+{% endblock %}

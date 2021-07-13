@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block compte %}
+<h1>Votre compte</h1>
+<!-- page compte -->
+
+<section class="card">
+
+	<!-- lien vers different page lier au droit-->
+	<nav>
+		Gestion
+		{% if droit == 9%}
+		<a class="button" href="{{ path('categories') }}"  title="categorie">Cathegories</a>
+		<a class="button" href="{{ path('menbres') }}"  title="menbre">Menbre</a>
+		<a class="button" href="{{ path('messages') }}"  title="message">Message</a>
+		{% endif %}
+		
+		<a class="button" href="{{ path('comments') }}"  title="commentaire">Commentaires</a>
+		<a class="button" href="{{ path('streets') }}"  title="fiche">Streets</a>
+		<a class="button" href="{{ path('deconnec') }}"  title="deconnection">
+			<i class="icofont-ui-close"></i>
+			Deconnection
+			<i class="icofont-ui-close"></i>
+		</a>
+	</nav>
+</section>
+{% endblock %}

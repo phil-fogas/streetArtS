@@ -1,0 +1,39 @@
+
+ {% extends 'compte.html.twig' %}
+{% block title %}{{ title }}{% endblock %}
+        
+
+            
+{% block body %}
+
+<!--- ajout de categorie --->
+<h1>Gestion des categories</h1>
+<section class='card'>
+	<form action="{{ path('setcategorie') }}" method="post" class="form">
+		<div class="field">
+			<label for="categorieAd">Nom de la categorie: </label>
+			<small>
+				Nom de la nouvelle categorie
+			</small>
+			<input type="text" name="categorieAd" id="categorieAd">
+		</div>
+		<div class="">
+			<button type="submit" class="botton"><i class="icofont-ui-check"></i>Ajouter</button>
+		</div>
+	</form>
+	<!--- supretion de categorie --->
+	<form action="{{ path('delcategorie') }}" method="post" class="form">
+		<div class="field">
+			<label for="categorieDel">Categorie a supprimer: </label>
+			<select name="categorieDel" id="categorieDel">
+				<option value="">--selectionner votre categorie--</option>
+					{% for categorie in categorie %}
+   					<option value="{{ categorie.id }}">{{ categorie.name }}</option>
+        			{% endfor %}
+			</select>
+			<div class="">
+				<button type="submit" class="botton"><i class="icofont-ui-close"></i>Supprimer</button>
+			</div>
+		</form>
+	</section>
+{% endblock %}

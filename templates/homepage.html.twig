@@ -1,0 +1,77 @@
+{# On inclut le layout #}
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<!-- page aceuil -->
+<h1>la Passion Street Art</h1>
+
+<section class="article">
+	<!-- salutation -->
+	
+    <p class="center">
+	<strong>
+         <?php if (isset($_SESSION['auth'])) : ?>
+         {{ bonjour }} <?= $_SESSION['auth']['pseudo'] ?>
+        <?php else : ?>
+        {{ bonjour }}
+		<?php endif ?>
+    </strong>
+    </p>
+   	<p>
+		Vous allez découvrir ou redécouvrir l'Art urbain de votre ville.
+	</p>
+	<p>
+		Voir des oeuvres encore visible et revoir des anciennes qui ont étais éffacée.
+	</p>
+	<p>
+		Pensez a nous faire vos proposition de street art sur la page
+		<a href="{{ path('suggestion') }}" title="suggestion">Suggestion</a>.
+	</p>
+	<p>
+		Déja {{ count.total }} street Art inscrite dans notre base,
+	</p>
+	<p>
+	a cet art éphémère {{ count.ef }} sont éffacée de leur mur, mais pas sur le notre.
+	</p>
+	<p>
+    	Trois exemples de street Art de notre
+		<a href="{{ path('galerie') }}" title="galerie">
+			<i class="icofont-graffiti"></i>
+			 Galerie
+			<i class="icofont-graffiti"></i>
+		</a>
+	</p>
+</section>
+
+<div class="card centre">
+	<!-- exemple de fiche -->
+	{% for streets in streets %}
+	<article class="articles">
+		<header>
+			<h2>
+            {% if streets.name  %}
+            {{ streets.name }}
+            {%else%} 
+            street {{ streets.id }}</h2>
+            {%endif%}
+		</header>
+		
+		<img rel="prefetch"
+				src="./img/{{ streets.photo }}"
+				 data-src="./img/{{ streets.photo }}"
+				{% if streets.name  %}
+					alt="{{ streets.name }}"
+				{%else%} 
+					alt="{{ streets.photo }}"
+				{%endif%}
+		class="reduit" >
+		<footer>
+			<a href="{{ path('detail', {id:streets.id} ) }}" title="street {{ streets.id }}">Plus de détails </a>
+		</footer>
+	</article>
+	{% endfor %}
+</div>
+
+{% endblock %}

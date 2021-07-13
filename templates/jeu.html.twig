@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}jeu{% endblock %}
+
+{% block body %}
+<!-- page jeux en js -->
+<section  class="article">
+<h1>jeux de peinture</h1>
+
+	<div class="">
+		<canvas width="600" height="600" id="rec" >
+			Désolé votre navigateur ne prend pas en charge
+		</canvas>
+	</div>
+	
+	<div class="">
+		<p>
+			Vie :
+			<span id="vie" >0</span>
+			 / Taches :
+			<span id="tache" >beaucoup</span>
+		</p>
+		<p>
+			sur
+			<span id="parti" >0</span>
+			 partie jouer,
+			<span id="gagne" >0</span>
+			 gagnée et
+			<span id="perdu" >0</span>
+			 perdu
+		</p>
+		<button id="gauche">&#8592; gauche</button>
+		<button id="droite">droite &#8594;</button>
+		<button id="go">start/stop</button>
+		<p>
+			Utiliser les touches flèches droite et gauche du clavier ou les boutons ci-dessus pour faire bouger la raquette et effacée toutes les taches de peinture
+		</p>
+		<p>
+			*Attention il y a plusieurs couches
+		</p>
+	</div>
+
+</section>
+{% endblock %}
+
+{% block js %}
+<script src="{{ asset('js/ping.js') }}"></script>
+{% endblock %}

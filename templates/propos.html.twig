@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<h1>A propos</h1>
+<!-- page prpos -->
+<article class="article">
+	<p>
+		Tous les street Art réferené sur ce site ont étais fait par des amateur passionée de cet art grafique et pour faire connaitre ces oeuvre éphémère.
+	</p>
+	<p>
+		Tous les street Art vu sur ce site ont étais photographier et réfèrence par vous.
+	</p>
+	<p>
+		Les photos ont été faite par tout le monde est référencé par la communoté et par vote.
+	</p>
+	<p>
+		Les photos des oeuvres ont étais fournis gracieusement par des internautes 
+	</p>
+	<p>
+		Ils y a déja 
+		{{ count.total }}
+		 fiches de street Art inscrites dans notre base.
+	</p>
+	<p>
+		Nos menbres, vont réference, vérifier, explorer, marcher et trouver plein de street Art 
+	</p>
+	<p>
+		La liste des adresses sont fornit par une API de 
+		<a href="https://www.data.gouv.fr/fr/">data.gouv.fr</a>
+	</p>
+</article>
+{% endblock %}

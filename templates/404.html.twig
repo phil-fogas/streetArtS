@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<!-- page 404 -->
+
+<h1>Mais quel page chercher vous ?</h1>
+<section class="article">
+
+    <img src="{{ asset('pic/404.png') }}" alt="404">
+</section>
+
+<a href="{{ path('home') }}"  title="retour acceuil">Revenir sur le site</a>
+
+
+{% endblock %}

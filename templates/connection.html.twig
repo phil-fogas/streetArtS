@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block erreur %}
+
+<!-- message erreur suit reponce mot de passe -->
+{% if e %}
+<div class="alert danger">
+	<p>
+		{% if e == 1 %}
+		erreure de connection:
+		{% elseif e == 2 %}
+		Mais qui es tu ?
+		 {% elseif e == 3 %}
+		Oui mais ?
+		{% endif %} 
+	</p>
+</div>
+{% endif %}
+<!-- page connection -->
+<?php endif ?>
+{% endblock %}
+{% block body %}
+<h1>Connection</h1>
+<article class="article">
+<form action="{{ path('setconnection') }}" method="post" class="form">
+	<div class="field">
+		<label for="pseudo">Entrer votre pseudo ou email: </label>
+		<input type="text" name="pseudo" id="pseudo" required>
+		<span></span>
+	</div>
+	<div class="field">
+		<label for="password">Entrer votre mot de pass: </label>
+		<input type="password" name="password" id="password" required>
+		<span></span>
+	</div>
+	<div class="field">
+		<button type="submit" class="button"><i class="icofont-ui-check"></i>Entrer</button>
+	</div>
+	
+	<div class="">
+		<a href="{{ path('oublier') }}" title="mot de pass oublier">Mot de pass oublier</a>
+		<a href="{{ path('addcompte') }}" title="Création compte">Création compte</a>
+	</div>
+
+</form>
+</article>
+{% endblock %}

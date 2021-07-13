@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<!--creation compte menbre-->
+<h1>Création d'un nouveaux menbre</h1>
+<article class="article">
+	<form action="{{ path('adcompte') }}" method="post" class="form">
+		<div class="field">
+			<label for="pseudo">Entrer votre pseudo: </label>
+			<small>
+				il vous servira a vous connecter et sera inscrits sur les fiches de streetArt que vous référencerait
+			</small>
+			<input type="text" name="pseudo" id="pseudo" required>
+			<span></span>
+		</div>
+		<div class="field">
+			<label for="email">Entrer votre email: </label>
+			<small>
+				il vous servira a vous connecter
+			</small>
+			<input type="email" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+			<span></span>
+		</div>
+		<div class="field">
+			<label for="password">Entrer votre mot de pass: </label>
+			<small>
+				il vous servira a vous connecter, il sera crypter et même l’administrateur ne pourra le voir
+			</small>
+			<input type="password" name="password" id="password" required>
+			<span></span>
+		</div>
+		<div class="field">
+			<button type="submit" class="button">Crée</button>
+		</div>
+	</form>
+</article>
+{% endblock %}

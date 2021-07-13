@@ -1,0 +1,57 @@
+{% extends 'compte.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<!-- page gestion des menbres -->
+<h1>Liste des menbres</h1>
+<table>
+	<thead>
+		<tr>
+			<th>
+				pseudo
+			</th>
+			<th>
+				date creation
+			</th>
+			<th>
+				date visite
+			</th>
+			<th>
+				droit
+			</th>
+			<th>
+				suppresion
+			</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		{% for users in users %}
+		<tr>
+			<th>
+				{{ users.pseudo }}
+			</th>
+			<th>
+				{{ users.createdAt|date("d/m/Y h:i ") }}
+			</th>
+			<th>
+				{{ users.dateVisi|date("d/m/Y h:i ") }}
+			</th>
+			<th>
+			
+				{{ users.role.name }}
+				{% if users.role.name!='admin' and users.role.name!='visiteur' %}
+				<a href="{{ path('updroit', {id:users.id,d:users.role.id }) }}" >baculer</a>
+				
+			</th>
+			<th>
+				<a class="red" href="{{ path('delmenbre', {id:users.id}) }}"> Supprimer </a>
+				{% endif %}
+			</th>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

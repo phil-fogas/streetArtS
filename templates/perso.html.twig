@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<h1>Connection</h1>
+
+<form action="./dom/login.php" method="post" class="form">
+    <div class="field">
+        <label for="name">Entrer votre pseudo ou email: </label>
+        <input type="text" name="pseudo" id="pseudo" required>
+    </div>
+    <div class="field">
+        <label for="password">Entrer votre mot de pass: </label>
+        <input type="password" name="password" id="password" required>
+    </div>
+    <div class="field">
+        <button type="submit" class="button">Entrer</button>
+    </div>
+    <div class="">
+        <!--<a href="?p=oublier">Mot de pass oublier</a>  -->
+        <a href="?p=creationCompte">Création compte</a>
+    </div>
+</form>
+{% endblock %}

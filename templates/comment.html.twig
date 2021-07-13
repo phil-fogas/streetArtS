@@ -1,0 +1,75 @@
+{% extends 'compte.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+
+<!--- liste des commentaires du menbre --->
+<h1>liste des commentaires</h1>
+<table>
+	<thead>
+		<tr>
+			<th scope="col">
+				street
+			</th>
+			<th scope="col">
+				date creation et pseudo
+			</th>
+			<th scope="col">
+				commentaire
+			</th>
+			<th scope="col">
+				suppression
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+ <!-- list des comment cree par user -->
+		{% for comment in comment %}
+		
+		<tr>
+			<td >
+			<a  href="{{ path('detail', {id:comment.id} ) }}" target="_self"> street {{ comment.id }}</a>
+			</td>
+			<td>
+			{{ comment.dateAd|date("m-d-Y H:i ") }}
+			</td>
+			<td>
+				{{ comment.text }}
+			</td>
+			<td>
+				<a class="red" href="{{ path('delcomment', {id:comment.id}) }}" title="suprimer"><i class="icofont-ui-close"></i> Suprimer </a>
+			</td>
+		</tr>
+		{% endfor %}
+		<!--- liste des commentaires de tout le monde--->
+		
+		<tr>
+			<th colspan="4" scope="row">
+				<h2>Commentaires laisser par les autres</h2>
+			</th>
+		</tr>
+		{% for commentAll in commentAll %}
+		<tr>
+			<td >
+				<a  href="{{ path('detail', {id:commentAll.id} ) }}" target="_self"> street {{ commentAll.id }}</a>
+			</td>
+			<td>
+			{{ commentAll.dateAd|date("m-d-Y H:i ") }}
+				
+				 Par: 
+				{{ commentAll.idUsers }}
+			</td>
+			<td>
+				{{ commentAll.text }}
+			</td>
+			<td>
+				<a class="red" href="{{ path('delcomment', {id:commentAll.id}) }}" title="suprimer"><i class="icofont-ui-close"></i> Suprimer </a>
+			</td>
+		</tr>
+		{% endfor %}
+		
+	</tbody>
+</table>
+
+{% endblock %}

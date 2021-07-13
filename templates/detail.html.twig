@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block body %}
+<h1>Détail du street Art</h1>
+<section class="galerie">
+	<!-- page detailer de fiche -->
+	
+	{% if street.etat.statut == 'effacée' %}
+		<article class="card article efface">
+		{% else %}
+		<article class="card article">
+	{% endif %}
+	
+		<header >
+			{% if street.name %}
+			<h2>{{ street.name }}</h2>
+			{% else %}
+			<h2>street {{ street.id }}</h2>
+			{% endif %}
+			{% if street.dateCreation %}
+			<p>
+				Street Art créer vers {{ street.dateCreation|date('d/m/y') }}
+			</p>
+			{% endif %}
+			<p>
+				Au {{ street.adresse }}
+			</p>
+			<p>
+				<a href="{{ streets.maps }}" target="_blank">sur google maps</a>
+			</p>
+			<p>
+				dans la categorie: {{ street.cate.name }}
+			</p>
+			<p>
+				statut: {{ street.etat.statut }}
+			</p>
+		</header>
+		<main>
+				<img rel="prefetch" 
+				src="../img/{{ street.photo }}"
+				 data-src="../img/{{ street.photo }}"
+				{% if street.name  %}
+					alt="{{ street.name }}"
+				{%else%} 
+					alt="{{ street.photo }}"
+				{%endif%}
+				 class="photo">
+			<p>
+				Description:
+			</p>
+			<p>
+				{{ street.description }}
+			</p>
+		</main>
+		<footer >
+			<small>
+				Rédigé le
+				{{ street.dateFiche|date('d/m/y') }}
+				{% if street.user.pseudo %}
+				Par:{{ street.user.pseudo }}</strong>
+				{% endif %}
+			</small>
+			a reçu {{ street.valid }} votes
+		</small>
+		</footer>
+		{% if droit %}
+    <!-- verifie deja voter -->
+		{% if vote==null %}
+		Voulez vous réference cette oeuvre
+		<a class="green" href="{{ path('vote', {v:street.id,vot:'iuo'}) }}" title="vote oui"><i class="icofont-ui-check"></i> OUI </a>
+		<a class="red" href="{{ path('vote', {v:street.id,vot:'non'}) }}"  title="vote non"><i class="icofont-ui-close"></i> NON </a>
+		{% endif %}
+		<!-- action pour admin -->
+		
+
+		{% if  droit == 9 %}
+		<p>
+			Voulez vous le
+			<a class="red" href="{{ path('delpost', {id:street.id}) }}"  title="del post"><i class="icofont-ui-close"></i> Suprimer </a>
+			l'
+			<a class="blue" href="{{ path('archive', {id:street.id}) }}"  title="archivage"> Archiver </a>
+			ou le
+			<a class="green" href="{{ path('modif', {id:street.id}) }}"  title="modif post"><i class="icofont-ui-check"></i> Modifier </a>
+		</p>
+		{% endif %}
+    <!-- pour les moderateur -->
+		{% if  droit == 5 %}
+		<p>
+			Voulez vous le modifier
+			<a class="green" href="{{ path('modif', {id:street.id}) }}" title="modif post"><i class="icofont-ui-check"></i> Modifier </a>
+		</p>
+		{% endif %}
+		{% endif %}
+	
+		<form action="{{ path('setcomment') }}" method="post" class="form">
+			<!-- ajoute commentaire -->
+			<div class="field">
+				<label for="text">Votre commentaire: </label>
+				<textarea type="text" name="comment" id="comment" required></textarea>
+			</div>
+			<input type="hidden" name="street" value="{{ street.id }}">
+			{% if iduser %}
+			<input type="hidden" name="user_id" value="{{ iduser }}">
+			{% else %}
+			<input type="hidden" name="user_id" value="1">
+			{% endif %}
+			<div class="field">
+				<button type="submit" class="botton">Envoyer <i class="icofont-ui-check"></i></button>
+			</div>
+		</form>
+		<aside class="card">
+			<h3>Vos commentaires</h3>
+			<!-- liste des commentaire -->
+			<ul>
+				{% for comments in comments %}
+				<li>
+					<i class="icofont-comment"></i>
+					<small>
+						Commentée le
+						{{ comments.dateAd|date('d/m/y') }}
+						 Par:
+						<strong>{{ comments.pseudo }}</strong>
+					</small>
+					<p>
+						{{ comments.text }}
+						
+                     <!--  les admin et l'user peut suprimer -->
+						{% if comments.idusers == iduser or droit == 9 %}
+						| <a class="red" href="{{ path('delcomment', {id:comments.id}) }}"><i class="icofont-ui-close"></i> Suprimer </a>
+						{% endif %}
+
+						
+				</li>
+				{% endfor %}
+			</ul>
+		</aside>
+	</article>
+</section>
+{% endblock %}

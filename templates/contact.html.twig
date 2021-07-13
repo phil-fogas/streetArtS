@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block erreur %}
+<!-- message erreur lier retour reponce mail -->
+
+	{% if  e == 1 %} 
+	<div class="alert success">
+	Votre message est bien envoyer, vous aurais peut etre une responce dans les 48 heures
+	</div>
+	{% endif %}
+	{% if e ==2 %} 
+	<div class="alert info">
+	Votre message a étais transmit en privee a l'admin
+	</div>
+	{% endif %}
+	{% if e == 3 %} 
+	<div class="alert danger">
+	Votre message n'a étais transmit suite a une erreur
+	</div>
+	{% endif %}
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Contacter le webmaster</h1>
+
+<!-- formulaire  envoi mail -->
+<article class="article">
+	<form action="{{ path('addcontact') }}" method="post" class="form">
+		<div class="field">
+			<label for="email">Entrer votre email <i class="icofont-ui-email"></i>: </label>
+			<input type="email" name="email" id="email" placeholder="excemple: toto@streetArt.fr" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+			{% if droit==null %}
+			required
+			{% endif %}
+			>			
+			<span></span>
+		</div>
+		<div class="field">
+			<label for="sujet">Pour quel sujet: </label>
+			<input type="text" name="sujet" id="sujet">
+		</div>
+		<div class="field">
+			<label for="message">Entrer votre message: </label>
+			<textarea type="text" name="message" id="message" required></textarea>
+			<span></span>
+		</div>
+		<div class="field">
+			<button type="submit" class="botton">Envoyer</button>
+		</div>
+	</form>
+</article>
+
+{% endblock %}
+

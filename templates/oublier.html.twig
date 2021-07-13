@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<h1>Mot de pass oublier</h1>
+<!-- page du mot de pass oublier -->
+<article class="article">
+<form action="{{ path('setoublier') }}" method="post" class="form">
+	<div class="field">
+		<label for="pseudo">Entrer votre pseudo: </label>
+		<input type="text" name="pseudo" id="pseudo" required>
+		<span></span>
+	</div>
+	<div class="field">
+		<label for="email">Entrer votre email: </label>
+		<input type="text" name="email" id="email" required>
+		<span></span>
+	</div>
+	<div class="field">
+		<label for="password">Entrer votre mot de pass: </label>
+		<input type="password" name="password" id="password" required>
+		<span></span>
+	</div>
+	<div class="field">
+		<button type="submit" class="button"><i class="icofont-ui-check"></i>Entrer</button>
+	</div>
+	
+	<div class="">
+		<a href="{{ path('addcompte') }}" title="Création compte">Création compte</a>
+	</div>
+	
+</form>
+</article>
+{% endblock %}

@@ -1,0 +1,92 @@
+
+<!-- page des resulta des recherche des fiches   -->
+
+{% for streets in streets %}
+
+	{% if streets.statut == 'effacée' %}
+		<article class="card articles efface">
+		{% else %}
+		<article class="card articles">
+	{% endif %}
+	
+		<header >
+		
+			{% if streets.name %}
+			<h2><a  href="{{ path('detail', {id:streets.id} ) }}" target="_self"> {{ streets.name }}</a></h2>
+			{% else %}
+			<h2><a  href="{{ path('detail', {id:streets.id} ) }}" target="_self"> street {{ streets.id }}</a></h2>
+			{% endif %}
+			{% if streets.dateCreation %}
+			<p>
+				Street Art créer vers {{ streets.dateCreation|date('d/m/y') }}
+			</p>
+			{% endif %}
+			<p>
+				Au {{ streets.adresse }}
+			</p>
+			<p>
+				 
+			{% if streets.dist  %}
+			a
+			<!-- affichage de la distance -->
+			<a href="https://www.google.com/maps/place/{{ streets.latitude }},{{ streets.longitude }}"  title="possiton gps" target="_blank">
+				{{ streets.dist|number_format(2) }}
+				 Km
+			</a>
+	
+			{% endif %}
+			</p>
+			<p>
+				dans la categorie: {{ streets.categorie }}
+			</p>
+			<p>
+				statut: {{ streets.statut }}
+			</p>
+		</header>
+		<main>
+				<img rel="prefetch" 
+				src="../img/{{ streets.photo }}"
+				 data-src="../img/{{ streets.photo }}"
+				{% if streets.name  %}
+					alt="{{ streets.name }}"
+				{%else%} 
+					alt="{{ streets.photo }}"
+				{%endif%}
+				 class="photo">
+			<p>
+				Description:
+			</p>
+			<p>
+				{{ streets.description }}
+				<a  href="{{ path('detail', {id:streets.id} ) }}" target="_self"> plus de détail</a>
+			</p>
+		</main>
+		<footer >
+			<small>
+				Rédigé le
+				{{ streets.dateFiche|date('d/m/y') }}
+				{% if streets.pseudo %}
+				Par:<strong>{{ streets.pseudo }}</strong>
+				{% endif %}
+			</small>
+        <small>
+			a reçu {{ streets.valid }} votes
+		</small>
+		</footer>
+
+		<!-- affichage nombre commentaire -->
+		
+		{% for counts in counts %}
+		
+		{% if counts.idStreet == streets.id %}
+		
+		<p>
+			Commentaires:
+			{{ counts.count }}
+		</p>
+		{% endif %}
+		{% endfor %}
+	</footer>
+</article>
+{% endfor %}
+

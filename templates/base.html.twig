@@ -1,19 +1,148 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="fr">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+        <title>{% block title %}Street Art{% endblock %}</title>
+          {% block css %}
+          <link href="{{ asset('css/normalize.min.css') }}" rel="stylesheet" />
+          <link rel="stylesheet" href="{{ asset('css/icofont.min.css') }}" />
+          <link href="{{ asset('css/style.css') }}" rel="stylesheet" /> 
         {% endblock %}
-
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
+        <!-- facicon tous navigateur -->
+    <link rel="icon" type="image/ico" href="{{ asset('/pic/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('pic/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('pic/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('pic/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('pic/site.webmanifest') }}">
+    <link rel="mask-icon" href="{{ asset('pic/safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="{{ asset('pic/ms-icon-144x144.png') }}">
+    <meta name="theme-color" content="#ffffff">
+    <!-- pour les mobiles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes">
+    <!-- pour le referencement -->
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta name="description" lang="fr" content="{{ description }}"/>
+    <meta name="keywords" lang="fr" content="{{ keywords }}"/>
+    <meta name="robots" content="index,follow" />
+    <meta name="language" content="fr">
     </head>
     <body>
-        {% block body %}{% endblock %}
+    <!-- dark mode -->
+<a id="dark">Activer le thème jour/nuit</a>
+<div class="ciel">
+<!-- les nuages qui bouge -->
+    <div class="toit">
+        <!-- dessin du toit -->
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+             width="100%" height="100%" viewBox="0 0 1000 90"  xml:space="preserve">
+            <defs>
+                <pattern  id="scales" width="10" height="10"  fill="saddlebrown"
+                         patternUnits="userSpaceOnUse"  patternTransform="scale(2)">
+                    <g id="curves">
+                        <path id="inner" d="M0 0c0,10, 10,10 10,0" stroke="brown" />
+                        <path id="outer" d="M0 0c0,10, 10,10 10,0" stroke="rosybrown"/>
+                    </g>
+                    <use x="5" y="5" xlink:href="#curves" />
+                    <use x="-5" y="5" xlink:href="#curves" />
+                    <use x="0" y="0" xlink:href="#curves" />
+                    <use x="5" y="-5" xlink:href="#curves" />
+                    <use x="-5" y="-5" xlink:href="#curves" />
+                </pattern>
+            </defs>
+
+            <polygon points="800 0, 150 0, -150 190, 1100 190" fill="url(#scales)"  />
+        </svg>
+
+
+    </div>
+
+</div>
+
+<div class="container">
+
+         <header class="header">
+            <nav class="nav" >
+            <a class="button" href="{{ path('home') }}" target="_self"><i class="icofont-home"></i> Acceuil</a>
+            <a class="button" href="{{ path('galerie') }}" target="_self"><i class="icofont-graffiti"></i> Galerie</a>
+            {% if droit %}  
+            <a class="button" href="{{ path('compte') }}" title=""><i class="icofont-user"></i> Compte</a>
+            {% endif %}
+            <a class="button" href="{{ path('plan') }}" target="_self"><i class="icofont-search-map"></i> Plan</a>
+            <a class="button" href="{{ path('suggestion') }}" target="_self"> Suggestion</a>
+            <a class="button" href="{{ path('jeu') }}" target="_self"><i class="icofont-ui-game"></i> Jeu</a>
+            </nav>
+        </header>
+
+        <main class="main">
+             {% block erreur %}
+
+            {% endblock %}
+             {% block compte %}
+
+            {% endblock %}
+            {% block body %}
+
+            {% endblock %}
+
+        </main>
+ <footer class="footer">
+
+        <fieldset>
+            <legend>Divers</legend>
+            <div class="contact">
+
+                <nav>
+                    <a href="{{ path('contact') }}" title="contact"><i class="icofont-ui-email"></i> Contact</a>
+                    {% if droit %}
+                    <a  href="{{ path('deconnec') }}" title="deconnection">Deconnection <i class="icofont-ui-close"></i> </a>
+                     {% else %}
+                    <a href="{{ path('connection') }}" title="login"><i class="icofont-ui-lock"></i> connection</a>
+                    {% endif %}
+                    <a href="{{ path('propos') }}" title="a propos">A propos</a>
+                </nav>
+
+            </div>
+        </fieldset>
+        <!-- pour la lampe qui change selon dark -->
+        <div class="lampe">
+
+        </div>
+
+        <div class="entree">
+            <nav><a href="{{ path('galerie') }}" title="galerie">Entree
+                    <p>dans la</p>
+                    <p>galerie</p>
+                </a>
+            </nav>
+        </div>
+        <!-- pour la lampadaire qui change selon dark -->
+        <div class="lampadaire">
+
+        </div>
+        <fieldset>
+            <legend>Reseaux</legend>
+            <div class="reseau">
+            <!-- reseau -->
+                <nav>
+                    <a href="https://site.fr/" title="site.fr"><i class="icofont-web"></i> site.fr</a>
+                </nav>
+            </div>
+
+        </fieldset>
+
+    </footer>
+    <p>Copyright &copy;2021</p>
+</div>
+{% block js %}
+ {% endblock %}
+       
+<script src="{{ asset('js/street.js') }}"></script>
     </body>
 </html>

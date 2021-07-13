@@ -1,0 +1,134 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block erreur %}
+<!-- retour erreure -->
+
+	{% if e == 1 %}
+	<div class="alert success">
+		Votre suggestion a étais envoyer
+	</div>
+	{% endif %}
+	{% if e == 2 %}
+	<div class="alert danger">
+		Suggestion non transmi!
+	</div>
+	{% endif %}
+	{% if e == 3 %}
+	
+	<div class="alert danger">
+		Votre suggestion ne sera pas traiter
+	</div>
+	{% endif %}
+{% endblock %}
+
+
+{% block body %}
+<!-- pages sugestion  -->
+<article class="article">
+<h1>Suggérer un nouveaux street Art</h1>
+     {% if droit == null %}
+      <p>
+      votre suggestion sera enregistrer anonymement, si vous voulez voir les autres streetArt et voter <a href="{{ path('addcompte') }}" title="Création compte">Crée votre compte</a>
+      </p>
+      {% endif %}
+
+
+			<div class="field">
+			<label for="photo">photo: </label>
+			<small>
+				une jolie photo de l'oeuvre
+			</small>
+			<input type="file" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg" required>
+			<span></span>
+
+			<span class="alert2"></span>
+		</div>
+
+		<form action="{{ path('setpost') }}" method="post" class="form" enctype='multipart/form-data'>
+			<!-- visualisation image compreser -->
+			<div class="field">
+				<img src="./pic/bombe.png" alt="image compress" id="compressImg">
+				<input type="hidden" name="image" id="image">
+			</div>
+
+			<div class="field">
+				<label for="adresse">Adresse: </label>
+				<small>
+					Adresse ou se trouve le street Art
+				</small>
+				<input type="text" name="adresse" id="adresse" placeholder="exemple: 23 rue du streetArt lyon" required>
+				<span></span>
+				<input type="hidden" name="latitude" id="latitude" >
+				<input type="hidden" name="longitude" id="longitude" >
+				<div >
+					ou
+					<a href="#" id="localise" class="button">Localise moi</a>
+					<p>
+						<span id="info" class="alert"></span>
+					</p>
+				</div>
+				<!-- affichage dinamique de la liste des rue sugerer -->
+				<div id="adress" >
+					<label >Suggestion de rue: </label>
+					<small>
+						cliquez dessus
+					</small>
+					<div id="address" class="card"></div>
+				</div>
+			</div>
+			<!-- seclection de la categorie -->
+			<div class="field">
+				<label for="categorie">Categorie: </label>
+				<small>
+					Quelle style de street peinte, papier collée,
+				</small>
+				<select name="categorie" id="categorie">
+					<option value="1">selectionner votre type</option>
+					{% for categorie in categorie %}
+   					<option value="{{ categorie.id }}">{{ categorie.name }}</option>
+        			{% endfor %}
+				</select>
+				<!-- pour les admins lien vers la gestion categorie -->
+				{% if droit==9 %}
+				<a class="blue" href="{{ path('categories') }}"> Gestion categorie </a>
+				{% endif %}
+			</div>
+			<div class="field">
+				<label for="name">Nom: </label>
+				<small>
+					Nom de l'oeuvre si vous la connaiser
+				</small>
+				<input type="text" name="name" id="name">
+			</div>
+			<div class="field">
+				<label for="description">Description: </label>
+				<small>
+					Decriver le street Art eventuellemnet le nom du créateur
+				</small>
+				<textarea name="description" id="description"></textarea>
+			</div>
+			<div class="field">
+				<label for="dateCreation">Date de création: </label>
+				<small>
+					date de création de l'oeuvre, si vous connaiser juste l'année mettre 01/01/année de création oulaisser vide
+				</small>
+				<input type="date" name="dateCreation" id="dateCreation">
+			</div>
+			<!-- affichage message alert -->
+			<div class="alert2"></div>
+			<!-- recuperation id user -->
+			<input type="hidden" name="user_id"
+			{% if iduser %}
+			value="{{ iduser }}"
+			{% else %}
+			value="1"
+			{% endif %}
+			>
+			<div class="">
+				<button type="submit" id="submit" class="botton"><i class="icofont-ui-check"></i>Suggérer</button>
+			</div>
+		</form>
+</article>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<!-- page plan pour rechecher avec l'adresse et dans un rayon autour de cette adresse -->
+
+<article class="article">
+<h1>Plan des street Art </h1>
+	<form action="#" method="post" class="form">
+		<div class="field">
+			<input type="hidden" name="p" id="p" value="plan">
+			<label for="adresse">Adresse: </label>
+			<small>
+				Adresse ou vous voulez chercher
+			</small>
+			<input type="text" name="adresse" id="adresse" placeholder="exemple: 23 rue du streetArt lyon" required>
+			<span></span>
+			<input type="hidden" name="latitude" id="latitude" >
+			<input type="hidden" name="longitude" id="longitude" >
+		</div>
+		<div class="field">
+			ou
+			<a href="#" id="localise" class="button">Localise moi</a>
+			<p>
+				<span id="info" class="alert"></span>
+			</p>
+		</div>
+		<div id="adress" class="field">
+			<label>Suggestion de rue: </label>
+			<small>
+				cliquez dessus
+			</small>
+			<div id="address" class="card"></div>
+		</div>
+		<div class="field">
+			<label for="km">Dans un rayon de : </label>
+			<input type="number" name="km" id="km" value="5" min="1" max="999">
+			 Km
+		</div>
+		<div class="field">
+			<button type="submit" class="botton"><i class="icofont-search"></i> recherche</button>
+		</div>
+	</form>
+</article>
+<!-- afichage de la recherhce  en ajax ou sumit -->
+<div id="galerie" class="centre">
+{{ include('search.html.twig') }}
+</div>
+{% endblock %}

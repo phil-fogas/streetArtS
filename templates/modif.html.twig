@@ -1,0 +1,128 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<!-- page de modification des fiche -->
+<h1>Modification street Art</h1>
+
+	{% if streets.statut == 'effacée' %}
+		<article class="card article efface">
+		{% else %}
+		<article class="card article">
+	{% endif %}
+
+	<form action="{{ path('uppost', {id:streets.id}) }}" method="post" class="form" enctype='multipart/form-data'>
+   <div class="field">
+	
+			<img rel="prefetch" 
+				src="../img/{{ streets.photo }}"
+				 data-src="../img/{{ streets.photo }}"
+				{% if streets.name  %}
+					alt="{{ streets.name }}"
+				{%else%} 
+					alt="{{ streets.photo }}"
+				{%endif%}
+				 class="photo">
+		
+	</div>
+		<div class="field">
+			<label for="name">Nom: </label>
+			<small>
+				Nom de l'oeuvre si vous la connaiser
+			</small>
+			<input type="text" name="name" id="name"value="{{ streets.name }}">
+		</div>
+		<div class="field">
+			<label for="description">Description: </label>
+			<small>
+				Descriver le street Art si elle est peinte, ou collée eventuellemnet le non du créateur
+			</small>
+			<textarea type="text" name="description" id="description">{{ streets.description }}</textarea>
+		</div>
+		<div class="field">
+			<label for="categorie">Catégorie: </label>
+			<small>
+				Quelle style de street peinte, papier collée,
+			</small>
+			<select name="categorie" id="categorie" >
+					{% for categorie in categorie %}
+   					<option value="{{ categorie.id }}">{{ categorie.name }}</option>
+        			{% endfor %}
+			</select>
+		</div>
+		<div class="field">
+			<label for="dateCreation">Date de création: </label>
+			<small>
+				date de création de l'oeuvre, si vous connaiser juste l'année mettre 01/01/année de création oulaisser vide
+			</small>
+			<input type="date" name="dateCreation" id="dateCreation"value="{{ streets.dateCreation }}">
+		</div>
+		<div class="field">
+			<label for="adresse">Adresse: </label>
+			<small>
+				Adresse ou se trouve le street Art
+			</small>
+			<input type="text" name="adresse" id="adresse" placeholder="exemple: 23 rue du streetArt lyon"value="{{ streets.adresse }}"required>
+			<input type="hidden" name="latitude" id="latitude" value="{{ streets.latitude }}">
+			<input type="hidden" name="longitude" id="longitude" value="{{ streets.longitude }}">
+			<div id="adres" class="card">
+				<label for="suggestion rue">Suggestion de rue: </label>
+				<small>
+					cliquez dessus
+				</small>
+				<div id="address" class="card"></div>
+			</div>
+		</div>
+		<!-- les admins peuvent modifier le nombre de vote -->
+		{% if droit == 9 %}
+		<div class="field">
+			<label for="valid">vote: </label>
+			si depasse 5 elle sera visible :
+			<input type="number" name="valid" id="valid" value="{{ streets.valid }}">
+		</div>
+		<select name="user" id="user" >
+				{% for users in users %}
+				<option value="{{ users.id }}"
+					{% if users.id == streets.idUser %}
+					selected
+					{% endif %}  
+					>{{ users.pseudo }}					
+				</option>
+				{% endfor %}
+		</select>
+		<!-- les admins peuvent modifier le statut -->
+		<div class="field">
+			<label for="statut">statut: </label>
+			<small>
+				Quelle style de street peinte, papier collée,
+			</small>
+			<select name="statut" id="statut">
+				{% for statuts in statuts %}
+   					<option value="{{ statuts.id }}"
+					 {% if statuts.id == streets.statut %}
+					selected  
+					{% endif %}   
+					>{{ statuts.statut }}
+					</option>
+        		{% endfor %}
+								
+			</select>
+		</div>
+		{% else %}
+		<!-- ce que voie les non admin -->
+		<div class="field">
+			<label for="valid">vote: </label>
+			si depasse 5 votes, elle sera visible par tous le monde:
+			{{ streets.valid }}
+			 votes
+			<input type="hidden" name="valid" id="valid" value="{{ streets.valid }}">
+		</div>
+		{% endif %}
+	
+		<div class="field">
+			<button type="submit" class="botton"><i class="icofont-ui-check"></i>Modifier / Sauvegarder</button>
+		</div>
+	</form>
+</article>
+{% endblock %}

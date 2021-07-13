@@ -1,0 +1,12 @@
+/* Webfont: BakerStreetRough */@font-face {
+    font-family: 'BakerStreetRough';
+    src: url('BakerStreetRough.eot'); /* IE9 Compat Modes */
+    src: url('BakerStreetRough.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('BakerStreetRough.woff') format('woff'), /* Modern Browsers */
+         url('BakerStreetRough.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('BakerStreetRough.svg#BakerStreetRough') format('svg'); /* Legacy iOS */
+    font-style: normal;
+    font-weight: normal;
+    text-rendering: optimizeLegibility;
+}
+
