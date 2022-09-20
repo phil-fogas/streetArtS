@@ -324,7 +324,7 @@ class DefaultController extends AbstractController
           $passage_ligne = "\r\n";
           $header = "";
           $header .= "MIME-Version: 1.0" . $passage_ligne;
-          $header .= "Subject: ".$ujet." " . $passage_ligne;
+          $header .= "Subject: ".$sujet." " . $passage_ligne;
           $header .= "Date: " . date('r') . $passage_ligne;
           $header .= "From: ".$email." " . $passage_ligne;
           $message = (wordwrap($request->get('message'), 70, $passage_ligne));
@@ -946,7 +946,7 @@ class DefaultController extends AbstractController
         
     }
 
-    public function delmenbre($longitude): Response
+    public function delmenbre($id): Response
     {
      
        
